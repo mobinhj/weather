@@ -3,34 +3,30 @@ package com.example.myapp05
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.RelativeLayout
-import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
 import org.json.JSONObject
 import java.net.URL
-import java.text.SimpleDateFormat
 import java.util.*
 import com.squareup.picasso.Picasso
 
 class MainActivity : AppCompatActivity() {
 
 
-    val API = "NGkPDa4koRes4s9mNW0s"
+    val app_code = "xdjT6t-y6emD9tugkEW_7w"
+    val api = "NGkPDa4koRes4s9mNW0s"
     var long :Double? = 0.0
     var lot :Double? = 0.0
+    var city :String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         submitButton.setOnClickListener {
 
-            long = lang.text.toString().toDouble()
-            lot = lat.text.toString().toDouble()
-            if (long != 0.0 && lot != 0.0) {
+            city = cityEditText.text.toString()
+//            long = lang.text.toString().toDouble()
+//            lot = lat.text.toString().toDouble()
+            if (city != "") {
                    weatherTask().execute()
                }else {
                 errorText.visibility = View.VISIBLE
@@ -47,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         override fun doInBackground(vararg params: String?): String? {
             var response : String?
             try {
-                response = URL("https://weather.cit.api.here.com/weather/1.0/report.json?product=observation&latitude=$lot&longitude=$long&oneobservation=true&app_id=$API&app_code=xdjT6t-y6emD9tugkEW_7w").readText(Charsets.UTF_8)
+                response = URL("https://weather.cit.api.here.com/weather/1.0/report.json?product=observation&name=$city&oneobservation=true&app_id=$api&app_code=$app_code").readText(Charsets.UTF_8)
             }catch (e:Exception){
                 response = null
             }
@@ -64,8 +60,12 @@ class MainActivity : AppCompatActivity() {
                 val temper = observation.getString("temperature")+"˚C"
                 val icone = observation.getString("iconLink")
                 val country =observation.getString("country")
+                val latitude = observation.getString("latitude")+" N"
+                val longitude = observation.getString("longitude")+" E"
                 Picasso.with(this@MainActivity).load(icone).into(imageSeason)
 
+                latTExtView.text = latitude
+                longTextView.text = longitude
                 update_at.text = Date().toString()
                 temp.text = temper
                 address.text = city + "," + country

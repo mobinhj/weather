@@ -25,17 +25,27 @@ android:background="@drawable/bg_gradient">
              >
 
              <EditText
-                 android:id="@+id/lat"
+                 android:id="@+id/cityEditText"
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"
-                 android:hint="Lat "
+                 android:inputType="textNoSuggestions"
+                 android:hint="City"
+                 android:textSize="20dp"/>
+
+             <TextView
+                 android:id="@+id/latTExtView"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:hint=" Lat "
+                 android:textSize="18dp"
                  android:inputType="numberDecimal" />
 
-             <EditText
-                 android:id="@+id/lang"
+             <TextView
+                 android:id="@+id/longTextView"
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"
-                 android:hint="Lon"
+                 android:hint=" Long"
+                 android:textSize="18dp"
                  android:inputType="numberDecimal" />
              <Button
                  android:id="@+id/submitButton"
@@ -44,7 +54,7 @@ android:background="@drawable/bg_gradient">
                  android:textSize="20dp"
                  android:layout_width="80dp"
                  android:layout_height="40dp"
-                 android:layout_marginTop="9dp"
+                 android:layout_marginTop="5dp"
                  android:layout_marginLeft="125dp"/>
          </LinearLayout>
 
