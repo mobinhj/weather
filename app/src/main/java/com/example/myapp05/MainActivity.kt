@@ -63,11 +63,12 @@ class MainActivity : AppCompatActivity() {
                 val city = observation.getString("city")
                 val temper = observation.getString("temperature")+"˚C"
                 val icone = observation.getString("iconLink")
+                val country =observation.getString("country")
                 Picasso.with(this@MainActivity).load(icone).into(imageSeason)
 
                 update_at.text = Date().toString()
                 temp.text = temper
-                address.text = city
+                address.text = city + "," + country
 
                 loader.visibility = View.GONE
                 mainContainer.visibility = View.VISIBLE
