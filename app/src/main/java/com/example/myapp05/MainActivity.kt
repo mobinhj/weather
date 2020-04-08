@@ -4,6 +4,7 @@ import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 import java.net.URL
@@ -21,15 +22,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        update_at.text = Date().toString()
         submitButton.setOnClickListener {
-
             city = cityEditText.text.toString()
-//            long = lang.text.toString().toDouble()
-//            lot = lat.text.toString().toDouble()
             if (city != "") {
                    weatherTask().execute()
                }else {
-                errorText.visibility = View.VISIBLE
+                Toast.makeText(this,"Please enter a City",Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -66,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
                 latTExtView.text = latitude
                 longTextView.text = longitude
-                update_at.text = Date().toString()
+
                 temp.text = temper
                 address.text = city + "," + country
 
