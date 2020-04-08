@@ -2,11 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:padding="25dp"
-android:background="@drawable/bg_gradient">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="25dp"
+    android:background="@drawable/bg_gradient">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <RelativeLayout
          android:id="@+id/mainContainer"
          android:layout_width="match_parent"
@@ -19,7 +22,7 @@ android:background="@drawable/bg_gradient">
              android:layout_height="wrap_content"
              android:layout_below="@id/addressContainer"
              android:layout_marginLeft="0dp"
-             android:layout_marginTop="15dp"
+             android:layout_marginTop="1dp"
              android:orientation="vertical"
 
              >
@@ -87,16 +90,17 @@ android:background="@drawable/bg_gradient">
              android:layout_height="wrap_content"
              android:layout_centerInParent="true"
              android:layout_below="@id/location"
+             android:layout_marginTop="110dp"
              android:orientation="vertical">
 
              <TextView
                  android:id="@+id/temp"
                  android:layout_width="wrap_content"
-                 android:layout_height="184dp"
+                 android:layout_height="match_parent"
                  android:layout_gravity="center"
                  android:fontFamily="sans-serif-thin"
                  android:text="0°C"
-                 android:textSize="90dp" />
+                 android:textSize="70dp" />
 
 
          </LinearLayout>
@@ -125,6 +129,7 @@ android:background="@drawable/bg_gradient">
 
 
     </RelativeLayout>
+    </ScrollView>
 
     <ProgressBar
         android:id="@+id/loader"
