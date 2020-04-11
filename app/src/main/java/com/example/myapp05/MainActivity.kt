@@ -39,14 +39,13 @@ class MainActivity : AppCompatActivity() {
             mainContainer.visibility = View.GONE
             errorText.visibility = View.GONE
         }
+
         override fun doInBackground(vararg params: String?): String? {
-            var response : String?
-            try {
-                response = URL("https://weather.cit.api.here.com/weather/1.0/report.json?product=observation&name=$city&oneobservation=true&app_id=$api&app_code=$app_code").readText(Charsets.UTF_8)
+            return try {
+                URL("https://weather.cit.api.here.com/weather/1.0/report.json?product=observation&name=$city&oneobservation=true&app_id=$api&app_code=$app_code").readText(Charsets.UTF_8)
             }catch (e:Exception){
-                response = null
+                null
             }
-            return response
         }
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
@@ -78,3 +77,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
+
