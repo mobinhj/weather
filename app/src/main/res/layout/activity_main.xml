@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -66,7 +65,6 @@
                      android:layout_width="70dp"
                      android:layout_height="35dp"
                      android:layout_marginLeft="20dp"
-                     android:layout_marginTop="0dp"
                      android:background="@color/colorAccent"
                      android:text="Submit"
                      android:textSize="15dp" />
@@ -96,7 +94,7 @@
              android:layout_height="wrap_content"
              android:layout_centerInParent="true"
              android:layout_below="@id/location"
-             android:layout_marginTop="150dp"
+             android:layout_marginTop="15dp"
              android:orientation="horizontal">
 
              <ImageView
@@ -116,16 +114,240 @@
 
          </LinearLayout>
 
-         <LinearLayout
-             android:id="@+id/seasonPicture"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_alignParentBottom="true"
-             android:layout_below="@+id/overviewContainer"
-             android:gravity="center"
-             android:orientation="vertical"
-             >
-         </LinearLayout>
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/overviewContainer"
+            android:layout_marginTop="100dp">
+
+            <LinearLayout
+                android:id="@+id/layoutWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="90dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/day1layout"
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/day1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Day 1" />
+
+                    <TextView
+                        android:id="@+id/tMaxD1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="max temp"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/tMinD1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="min temp" />
+
+                    <ImageView
+                        android:id="@+id/imageD1"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/day2layout"
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/day2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Day 2" />
+
+                    <TextView
+                        android:id="@+id/tMaxD2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="max temp" />
+
+                    <TextView
+                        android:id="@+id/tMinD2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="min temp" />
+
+                    <ImageView
+                        android:id="@+id/imageD2"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/day3layout"
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/day3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Day 3" />
+
+                    <TextView
+                        android:id="@+id/tMaxD3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="max temp" />
+
+                    <TextView
+                        android:id="@+id/tMinD3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="min temp" />
+
+                    <ImageView
+                        android:id="@+id/imageD3"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/day4layout"
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/day4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Day 4" />
+
+                    <TextView
+                        android:id="@+id/tMaxD4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="max temp" />
+
+                    <TextView
+                        android:id="@+id/tMinD4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="min temp" />
+
+                    <ImageView
+                        android:id="@+id/imageD4"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/day5layout"
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/day5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Day 5" />
+
+                    <TextView
+                        android:id="@+id/tMaxD5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="max temp" />
+
+                    <TextView
+                        android:id="@+id/tMinD5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="min temp" />
+
+                    <ImageView
+                        android:id="@+id/imageD5"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/day6layout"
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/day6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Day 6" />
+
+                    <TextView
+                        android:id="@+id/tMaxD6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="max temp" />
+
+                    <TextView
+                        android:id="@+id/tMinD6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="min temp" />
+
+                    <ImageView
+                        android:id="@+id/imageD6"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/day7layout"
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/day7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Day 7" />
+
+                    <TextView
+                        android:id="@+id/tMaxD7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="max temp" />
+
+                    <TextView
+                        android:id="@+id/tMinD7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="min temp" />
+
+                    <ImageView
+                        android:id="@+id/imageD7"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </HorizontalScrollView>
 
 
     </RelativeLayout>

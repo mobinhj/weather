@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                 longTextView.text = longitude
 
                 temp.text = temper
-                address.text = city + "," + country
+                address.text = "$city,$country"
 
                 loader.visibility = View.GONE
                 mainContainer.visibility = View.VISIBLE
