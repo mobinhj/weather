@@ -14,11 +14,9 @@ import com.squareup.picasso.Picasso
 class MainActivity : AppCompatActivity() {
 
 
-    val app_code = "xdjT6t-y6emD9tugkEW_7w"
+    val appCode = "xdjT6t-y6emD9tugkEW_7w"
     val api = "NGkPDa4koRes4s9mNW0s"
-    var long :Double? = 0.0
-    var lot :Double? = 0.0
-    var city :String = ""
+    var city: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,14 +33,14 @@ class MainActivity : AppCompatActivity() {
     inner class weatherTask() : AsyncTask<String ,Void, String>(){
         override fun onPreExecute() {
             super.onPreExecute()
-            loader.visibility = View.VISIBLE
-            mainContainer.visibility = View.GONE
+            loader.visibility = View.INVISIBLE
+            mainContainer.visibility = View.VISIBLE
             errorText.visibility = View.GONE
         }
 
         override fun doInBackground(vararg params: String?): String? {
             return try {
-                URL("https://weather.cit.api.here.com/weather/1.0/report.json?product=observation&name=$city&oneobservation=true&app_id=$api&app_code=$app_code").readText(Charsets.UTF_8)
+                URL("https://weather.cit.api.here.com/weather/1.0/report.json?product=observation&name=$city&oneobservation=true&app_id=$api&app_code=$appCode").readText(Charsets.UTF_8)
             }catch (e:Exception){
                 null
             }
@@ -68,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                 temp.text = temper
                 address.text = "$city,$country"
 
-                loader.visibility = View.GONE
+                loader.visibility = View.INVISIBLE
                 mainContainer.visibility = View.VISIBLE
             } catch (e: Exception) {
                loader.visibility = View.GONE
