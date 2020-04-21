@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         val tabItemCity = tabCity
         val tabItemMap = tabMap
         val viewPager = viewPager
-        update_at.text = Date().toString()
+//        update_at.text = Date().toString()
         val pagerAdapter = pagerAdapter(supportFragmentManager, tabLayout.tabCount)
         viewPager.adapter = pagerAdapter
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
