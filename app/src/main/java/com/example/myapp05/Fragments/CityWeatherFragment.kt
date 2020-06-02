@@ -75,26 +75,24 @@ class CityWeatherFragment : Fragment() {
             }
         }
 
-        cityEditText.setOnEditorActionListener(object : TextView.OnEditorActionListener{
-            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    Log.i(TAG,"Here you can write the code")
-                    return true
-                }
-                return false
-            }
-        })
+//        cityEditText.setOnEditorActionListener(object : TextView.OnEditorActionListener{
+//            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+//                if (actionId == EditorInfo.IME_ACTION_DONE) {
+//                    return true
+//                }
+//                return false
+//            }
+//        })
         cityEditText.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 hideKeyboard()
                 if (name.isNotEmpty()) {
+                    
                     val builder = AlertDialog.Builder(context)
                     builder.setCancelable(false) // if you want user to wait for some process to finish,
                     builder.setView(R.layout.progress)
                     val dialog: AlertDialog = builder.create()
                     dialog.show()
-
-
                     val retrofit = Retrofit.Builder()
                         .baseUrl(BASE_URL)
                         .addConverterFactory(GsonConverterFactory.create())
@@ -133,7 +131,6 @@ class CityWeatherFragment : Fragment() {
                             val long = observation?.longitude
                             val icon = observation?.iconLink
                             val picasso= Picasso.get()
-
                             if (city != null) {
                                 latTextView.text  = "Lat: " + lat.toString()
                                 longTextView.text = "Long: "+ long.toString()
@@ -153,7 +150,6 @@ class CityWeatherFragment : Fragment() {
                     val call = hereApi.getWeather(apiKey, name, product1, app_id, app_code)
                     call.enqueue(object : Callback<WeatherModel?> {
                         override fun onFailure(call: Call<WeatherModel?>, t: Throwable) {
-                            Log.e("console", t.message, t)
                         }
                         @SuppressLint("WrongConstant")
                         override fun onResponse(
@@ -174,8 +170,9 @@ class CityWeatherFragment : Fragment() {
                             }
                         }
                     })
+                    cityEditText.text.clear()
                 } else Toast.makeText(this.activity, "Enter the city", Toast.LENGTH_LONG).show()
-                true
+               true
             }
             false
         }
