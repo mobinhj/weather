@@ -76,7 +76,6 @@ class LocationWeatherFragment : Fragment(),OnMapReadyCallback {
                 .getWeatherLocation(app_id,app_code,product,oneobservation,latitude,longitude)
             callLocationWeather.enqueue(object : Callback<DayForecasts> {
                 override fun onFailure(call: Call<DayForecasts>, t: Throwable) {
-
                 }
                 override fun onResponse(call: Call<DayForecasts>,response:Response<DayForecasts>){
                     val location = response.body()?.observations?.location?.get(0)

@@ -17,11 +17,9 @@ internal class PagerViewAdapter (fm:FragmentManager?):FragmentPagerAdapter(fm!!)
             else -> CityWeatherFragment()
         }
     }
-
     override fun getCount(): Int {
         return 2
     }
-
     override fun getPageTitle(position: Int): CharSequence? {
         var title :String? = null
         if (position==0){

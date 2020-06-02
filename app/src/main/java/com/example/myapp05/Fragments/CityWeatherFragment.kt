@@ -66,9 +66,7 @@ class CityWeatherFragment : Fragment() {
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(view.windowToken, 0)
             }
-            // else {
             window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
-            // }
         }
         fun Fragment.hideKeyboard() {
             val activity = this.activity
@@ -76,7 +74,6 @@ class CityWeatherFragment : Fragment() {
                 activity.hideKeyboard()
             }
         }
-
 
         cityEditText.setOnEditorActionListener(object : TextView.OnEditorActionListener{
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
@@ -87,10 +84,8 @@ class CityWeatherFragment : Fragment() {
                 return false
             }
         })
-//        submitButton.setOnClickListener {
         cityEditText.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                // Call your code here
                 hideKeyboard()
                 if (name.isNotEmpty()) {
                     val builder = AlertDialog.Builder(context)
@@ -139,14 +134,11 @@ class CityWeatherFragment : Fragment() {
                             val icon = observation?.iconLink
                             val picasso= Picasso.get()
 
-
-
                             if (city != null) {
                                 latTextView.text  = "Lat: " + lat.toString()
                                 longTextView.text = "Long: "+ long.toString()
                                 tempView.text     = "$temp°C"
                                 address.text      = "$city,$country"
-
                                 picasso.load(icon).into(imageSeason)
                                 dialog.dismiss()
                             } else {
@@ -187,7 +179,6 @@ class CityWeatherFragment : Fragment() {
             }
             false
         }
-
         }
     }
 

@@ -14,19 +14,21 @@
         android:layout_marginEnd="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabBackground="@color/colorAccent"
+        app:tabSelectedTextColor="@color/colorPrimaryDark">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabCity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="search city" />
+             />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabMap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="search map" />
+             />
 
     </com.google.android.material.tabs.TabLayout>
 
@@ -38,5 +40,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabBar" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
