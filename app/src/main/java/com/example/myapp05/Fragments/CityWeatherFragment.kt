@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
@@ -15,6 +17,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapp05.Json.DailyForecasts.DayForecasts.DayForecasts
@@ -49,16 +52,13 @@ class CityWeatherFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        update_at.text = Date().toString()
         val product1 = "forecast_7days_simple"
         val app_id = "NGkPDa4koRes4s9mNW0s"
         val app_code = "xdjT6t-y6emD9tugkEW_7w"
         val product = "observation"
-
         val name = cityEditText.text
         val apiKey = "1r2mYo9MtRCoYu68HWa0R0Kru4axR2YwZSQATuPxx1U"
         val oneobservation = true
-
 
         fun AppCompatActivity.hideKeyboard() {
             val view = this.currentFocus
@@ -74,25 +74,18 @@ class CityWeatherFragment : Fragment() {
                 activity.hideKeyboard()
             }
         }
-
-//        cityEditText.setOnEditorActionListener(object : TextView.OnEditorActionListener{
-//            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
-//                if (actionId == EditorInfo.IME_ACTION_DONE) {
-//                    return true
-//                }
-//                return false
-//            }
-//        })
         cityEditText.setOnEditorActionListener { v, actionId, event ->
+            update_at.text = Date().toString()
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 hideKeyboard()
                 if (name.isNotEmpty()) {
-                    
                     val builder = AlertDialog.Builder(context)
                     builder.setCancelable(false) // if you want user to wait for some process to finish,
                     builder.setView(R.layout.progress)
                     val dialog: AlertDialog = builder.create()
+                    dialog.window?.setBackgroundDrawable( ColorDrawable(Color.TRANSPARENT))
                     dialog.show()
+
                     val retrofit = Retrofit.Builder()
                         .baseUrl(BASE_URL)
                         .addConverterFactory(GsonConverterFactory.create())
@@ -142,8 +135,10 @@ class CityWeatherFragment : Fragment() {
                                 dialog.dismiss()
                                 Toast.makeText(context, "City Not Found ", Toast.LENGTH_LONG).show()
                                 tempView.text = "0°C"
-                                address.text = "City,Country"
+                                address.text = null
                                imageSeason.setImageResource(0)
+                                latTextView.text  = null
+                                longTextView.text = null
                             }
                         }
                     })

@@ -37,6 +37,7 @@
                         android:layout_height="wrap_content"
                         android:hint="City,Country"
                         android:textSize="18sp"
+                        android:gravity="center"
                         android:textColorHint="@android:color/tab_indicator_text"
                         />
 
@@ -44,8 +45,8 @@
                         android:id="@+id/update_at"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Date now "
-                        android:textSize="14dp" />
+                        android:textSize="14sp"
+                        android:layout_marginTop="10dp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -66,10 +67,10 @@
 
                         <EditText
                             android:id="@+id/cityEditText"
-                            android:layout_width="130dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:hint="Enter the city"
-                            android:inputType="textPersonName"
+                            android:inputType="textCapCharacters"
                             android:imeOptions="actionDone"
                             android:textColor="@android:color/white"
                             android:textSize="20sp"

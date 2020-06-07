@@ -2,6 +2,7 @@ package com.example.myapp05.Fragments
 
 //import com.example.myapp05.GoogleMap.CustomInfoWindowGoogleMap
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.graphics.Color
@@ -78,7 +79,8 @@ class LocationWeatherFragment : Fragment(),OnMapReadyCallback {
                 override fun onFailure(call: Call<DayForecasts>, t: Throwable) {
 
                 }
-                override fun onResponse(call: Call<DayForecasts>,response:Response<DayForecasts>){
+                @SuppressLint("SetTextI18n")
+                override fun onResponse(call: Call<DayForecasts>, response:Response<DayForecasts>){
                     val location = response.body()?.observations?.location?.get(0)
                     city = location?.city
                     country = location?.country
@@ -90,8 +92,8 @@ class LocationWeatherFragment : Fragment(),OnMapReadyCallback {
                     val customView = inflater.inflate(R.layout.dialog_icone, null)
                     val dialogBuilder = AlertDialog.Builder(context.getContext())
                     picasso.load(icone).into(customView.image_icone)
-                    val hobbies = arrayOf(city+","+state+","+country+ "\n" +" temperature: "+temp+"°C")
-                    Log.i("console",state+","+city +","+country+","+temp+"°C")
+                    val hobbies = arrayOf("$city,$state,$country\n temperature: $temp°C")
+                    Log.i("console", "$state,$city,$country,$temp°C")
                     val textView = TextView(context.getContext())
                     textView.text = "Location Weather Info"
                     textView.setPadding(40, 30, 20, 30)

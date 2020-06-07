@@ -9,7 +9,6 @@
         android:id="@+id/image_icone"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:backgroundTint="#858585"
         android:background="@android:color/white"
         android:layout_gravity="center_horizontal"/>
 
