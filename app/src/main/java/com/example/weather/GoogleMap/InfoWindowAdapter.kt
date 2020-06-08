@@ -1,10 +1,10 @@
-package com.example.myapp05.GoogleMap
+package com.example.weather.GoogleMap
 
 import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.widget.TextView
-import com.example.myapp05.R
+import com.example.weather.R
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 

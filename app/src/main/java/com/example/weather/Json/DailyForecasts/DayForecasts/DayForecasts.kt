@@ -1,4 +1,4 @@
-package com.example.myapp05.Json.DailyForecasts.DayForecasts
+package com.example.weather.Json.DailyForecasts.DayForecasts
 
 
 import com.google.gson.annotations.SerializedName

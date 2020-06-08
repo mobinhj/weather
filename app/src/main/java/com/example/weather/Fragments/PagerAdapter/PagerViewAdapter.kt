@@ -1,9 +1,9 @@
-package com.example.myapp05.Fragments.PagerAdapter
+package com.example.weather.Fragments.PagerAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.myapp05.Fragments.CityWeatherFragment
-import com.example.myapp05.Fragments.LocationWeatherFragment
+import com.example.weather.Fragments.CityWeatherFragment
+import com.example.weather.Fragments.LocationWeatherFragment
 
 internal class PagerViewAdapter (fm:FragmentManager?):FragmentPagerAdapter(fm!!){
     override fun getItem(position: Int): Fragment {

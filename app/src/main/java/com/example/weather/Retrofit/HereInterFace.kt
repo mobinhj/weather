@@ -1,7 +1,7 @@
-package com.example.myapp05.Retrofit
+package com.example.weather.Retrofit
 
 import android.text.Editable
-import com.example.myapp05.Json.DailyForecasts.Forecast_7days.WeatherModel
+import com.example.weather.Json.DailyForecasts.Forecast_7days.WeatherModel
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

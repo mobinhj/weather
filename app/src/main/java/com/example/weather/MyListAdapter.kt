@@ -8,8 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.example.myapp05.Json.DailyForecasts.Forecast_7days.Forecast
-import com.example.myapp05.R
+import com.example.weather.Json.DailyForecasts.Forecast_7days.Forecast
+import com.example.weather.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_adapter.view.*
 

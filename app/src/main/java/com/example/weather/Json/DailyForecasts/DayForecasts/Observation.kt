@@ -1,9 +1,9 @@
-package com.example.myapp05.Json.DailyForecasts.Forecast_7days
+package com.example.weather.Json.DailyForecasts.DayForecasts
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Forecast(
+data class Observation(
     @SerializedName("daylight")
     val daylight: String,
     @SerializedName("description")
@@ -12,6 +12,8 @@ data class Forecast(
     val skyInfo: String,
     @SerializedName("skyDescription")
     val skyDescription: String,
+    @SerializedName("temperature")
+    val temperature: String,
     @SerializedName("temperatureDesc")
     val temperatureDesc: String,
     @SerializedName("comfort")
@@ -24,14 +26,18 @@ data class Forecast(
     val humidity: String,
     @SerializedName("dewPoint")
     val dewPoint: String,
-    @SerializedName("precipitationProbability")
-    val precipitationProbability: String,
+    @SerializedName("precipitation1H")
+    val precipitation1H: String,
+    @SerializedName("precipitation3H")
+    val precipitation3H: String,
+    @SerializedName("precipitation6H")
+    val precipitation6H: String,
+    @SerializedName("precipitation12H")
+    val precipitation12H: String,
+    @SerializedName("precipitation24H")
+    val precipitation24H: String,
     @SerializedName("precipitationDesc")
     val precipitationDesc: String,
-    @SerializedName("rainFall")
-    val rainFall: String,
-    @SerializedName("snowFall")
-    val snowFall: String,
     @SerializedName("airInfo")
     val airInfo: String,
     @SerializedName("airDescription")
@@ -44,26 +50,38 @@ data class Forecast(
     val windDesc: String,
     @SerializedName("windDescShort")
     val windDescShort: String,
-    @SerializedName("beaufortScale")
-    val beaufortScale: String,
-    @SerializedName("beaufortDescription")
-    val beaufortDescription: String,
-    @SerializedName("uvIndex")
-    val uvIndex: String,
-    @SerializedName("uvDesc")
-    val uvDesc: String,
     @SerializedName("barometerPressure")
     val barometerPressure: String,
+    @SerializedName("barometerTrend")
+    val barometerTrend: String,
+    @SerializedName("visibility")
+    val visibility: String,
+    @SerializedName("snowCover")
+    val snowCover: String,
     @SerializedName("icon")
     val icon: String,
     @SerializedName("iconName")
     val iconName: String,
     @SerializedName("iconLink")
     val iconLink: String,
-    @SerializedName("dayOfWeek")
-    val dayOfWeek: String,
-    @SerializedName("weekday")
-    val weekday: String,
+    @SerializedName("ageMinutes")
+    val ageMinutes: String,
+    @SerializedName("activeAlerts")
+    val activeAlerts: String,
+    @SerializedName("country")
+    val country: String,
+    @SerializedName("state")
+    val state: String,
+    @SerializedName("city")
+    val city: String,
+    @SerializedName("latitude")
+    val latitude: Double,
+    @SerializedName("longitude")
+    val longitude: Double,
+    @SerializedName("distance")
+    val distance: Double,
+    @SerializedName("elevation")
+    val elevation: Double,
     @SerializedName("utcTime")
     val utcTime: String
 )
