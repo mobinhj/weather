@@ -13,7 +13,6 @@ interface IHereApiDay {
                       @Query("app_code") app_code: String,
                       @Query("name") name: Editable,
                       @Query("product") product: String,
-                      @Query("oneobservation") oneobservation:Boolean
-    )
+                      @Query("oneObservation") oneObservation:Boolean)
             : Call<DayForecasts>
 }

@@ -1,10 +1,17 @@
 <resources>
     <string name="app_name">Weather</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="city">City</string>
-    <string name="lat">Lat</string>
-    <string name="submit">Submit</string>
+    <string name="lat">Lat:</string>
     <string name="title_activity_maps">Map</string>
     <string name="weather_location">weather location</string>
     <string name="loading">Loading ......</string>
+    <string name="todo">TODO</string>
+    <string name="enter_the_city">Enter the city</string>
+    <string name="city_country">City,Country</string>
+    <string name="_0_c">0°C</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="longitude">Long:</string>
+    <string name="day_1">Day 1</string>
+    <string name="max_temp">max temp</string>
+    <string name="min_temp">min temp</string>
 </resources>

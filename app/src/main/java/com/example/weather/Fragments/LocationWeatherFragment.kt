@@ -2,7 +2,6 @@ package com.example.weather.Fragments
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -32,17 +31,17 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 class LocationWeatherFragment : Fragment(),OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
-    val context: LocationWeatherFragment = this
-    var city :String? = ""
-    var country:String? = ""
-    var temp:String? = ""
-    var icone:String? = ""
-    var state:String? = ""
-    private val BASE_URL = "https://weather.api.here.com/weather/1.0/"
-    val app_id   = "NGkPDa4koRes4s9mNW0s"
-    val app_code = "xdjT6t-y6emD9tugkEW_7w"
-    val product  = "observation"
-    val oneobservation = "true"
+    private val context: LocationWeatherFragment = this
+    private var city :String? = ""
+    private var country:String? = ""
+    private var temp:String? = ""
+    private var icon:String? = ""
+    private var state:String? = ""
+    private val baseUrl = "https://weather.api.here.com/weather/1.0/"
+    private val appId   = "NGkPDa4koRes4s9mNW0s"
+    private val appCode = "xdjT6t-y6emD9tugkEW_7w"
+    private val product  = "observation"
+    private val oneObservation = "true"
         companion object {
         var mapFragment : SupportMapFragment?=null
     }
@@ -62,14 +61,14 @@ class LocationWeatherFragment : Fragment(),OnMapReadyCallback {
         mMap.setOnMapLongClickListener { latLng ->
             val markerOptions =  MarkerOptions()
             markerOptions.position(latLng)
-            val retrofit = Retrofit.Builder().baseUrl(BASE_URL)
+            val retrofit = Retrofit.Builder().baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             val hereApi = retrofit.create(IHereApiLocation::class.java)
             val latitude = latLng.latitude.toString()
             val longitude = latLng.longitude.toString()
             val callLocationWeather  = hereApi
-                .getWeatherLocation(app_id,app_code,product,oneobservation,latitude,longitude)
+                .getWeatherLocation(appId,appCode,product,oneObservation,latitude,longitude)
             callLocationWeather.enqueue(object : Callback<DayForecasts> {
                 override fun onFailure(call: Call<DayForecasts>, t: Throwable) {
 
@@ -82,22 +81,22 @@ class LocationWeatherFragment : Fragment(),OnMapReadyCallback {
                     state = location?.state
                     val observation = location?.observation?.get(0)
                      temp = observation?.temperature?.toDouble()?.toInt().toString()
-                     icone = observation?.iconLink
+                     icon = observation?.iconLink
                     val inflater = LayoutInflater.from(context.getContext())
                     val customView = inflater.inflate(R.layout.dialog_icone, null)
-                    val dialogBuilder = AlertDialog.Builder(context.getContext())
-                    picasso.load(icone).into(customView.image_icone)
+                    val dialogBuilder = AlertDialog.Builder(context.getContext(),R.style.CustomAlertDialog)
+                    picasso.load(icon).into(customView.image_icon)
                     val hobbies = arrayOf("$city,$state,$country\n temperature: $temp°C")
                     Log.i("console", "$state,$city,$country,$temp°C")
                     val textView = TextView(context.getContext())
-                    textView.text = "Location Weather Info"
+                    textView.text = "Location Weather Info :"
                     textView.setPadding(40, 30, 20, 30)
                     textView.textSize = 20f
-                    textView.setBackgroundColor(Color.CYAN)
+                    textView.setBackgroundColor(Color.TRANSPARENT)
                     textView.setTextColor(Color.BLACK)
                     val items = dialogBuilder.setView(customView).setCustomTitle(textView)
-                        .setItems(hobbies, DialogInterface.OnClickListener { dialog, which ->
-                        })
+                        .setItems(hobbies) { dialog, which ->
+                        }
                     items.show()
                 }
             })

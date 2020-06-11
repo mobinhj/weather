@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
@@ -7,12 +8,13 @@
 <RelativeLayout
     android:layout_width="60dp"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:padding="8dp"
+    tools:ignore="UselessParent">
         <TextView
             android:id="@+id/day"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Day 1"
+            android:text="@string/day_1"
             android:textSize="18sp"
             />
 
@@ -21,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/day"
-            android:text="max temp"
+            android:text="@string/max_temp"
             android:textSize="16sp"
             />
 
@@ -29,7 +31,7 @@
             android:id="@+id/tMinD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="min temp"
+            android:text="@string/min_temp"
             android:layout_below="@+id/tMaxD"
             android:textSize="14sp"
             />
@@ -40,6 +42,6 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_below="@+id/tMinD"
-             />
+            android:contentDescription="@string/todo" />
     </RelativeLayout>
 </LinearLayout>

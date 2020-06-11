@@ -24,6 +24,7 @@ import com.example.weather.Retrofit.IHereApiDay
 import com.example.mylistview.MyListAdapter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_city_weather.*
+import kotlinx.android.synthetic.main.fragment_city_weather.recycler_view
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,7 +37,7 @@ import java.util.*
  * A simple [Fragment] subclass.
  */
 class CityWeatherFragment : Fragment() {
-    private val BASE_URL = "https://weather.api.here.com/weather/1.0/"
+    private val baseUrl = "https://weather.api.here.com/weather/1.0/"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,15 +46,16 @@ class CityWeatherFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_city_weather, container, false)
     }
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val product1 = "forecast_7days_simple"
-        val app_id = "NGkPDa4koRes4s9mNW0s"
-        val app_code = "xdjT6t-y6emD9tugkEW_7w"
+        val appId = "NGkPDa4koRes4s9mNW0s"
+        val appCode = "xdjT6t-y6emD9tugkEW_7w"
         val product = "observation"
         val name = cityEditText.text
         val apiKey = "1r2mYo9MtRCoYu68HWa0R0Kru4axR2YwZSQATuPxx1U"
-        val oneobservation = true
+        val oneObservation = true
 
         fun AppCompatActivity.hideKeyboard() {
             val view = this.currentFocus
@@ -82,11 +84,11 @@ class CityWeatherFragment : Fragment() {
                     dialog.show()
 
                     val retrofit = Retrofit.Builder()
-                        .baseUrl(BASE_URL)
+                        .baseUrl(baseUrl)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build()
                     val retrofitDay = Retrofit.Builder()
-                        .baseUrl(BASE_URL)
+                        .baseUrl(baseUrl)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build()
 
@@ -95,16 +97,17 @@ class CityWeatherFragment : Fragment() {
                     val callDay =
                         hereApiDay.getWeatherDay(
                             apiKey,
-                            app_id,
-                            app_code,
+                            appId,
+                            appCode,
                             name,
                             product,
-                            oneobservation
+                            oneObservation
                         )
                     callDay.enqueue(object : Callback<DayForecasts> {
                         override fun onFailure(call: Call<DayForecasts>, t: Throwable) {
                             Log.e("console", t.message, t)
                         }
+
                         @SuppressLint("SetTextI18n")
                         override fun onResponse(
                             call: Call<DayForecasts>,
@@ -129,7 +132,7 @@ class CityWeatherFragment : Fragment() {
                             } else {
                                 dialog.dismiss()
                                 Toast.makeText(context, "City Not Found ", Toast.LENGTH_LONG).show()
-                                tempView.text = "0°C"
+                                tempView.text = null
                                 address.text = null
                                imageSeason.setImageResource(0)
                                 latTextView.text  = null
@@ -137,7 +140,7 @@ class CityWeatherFragment : Fragment() {
                             }
                         }
                     })
-                    val call = hereApi.getWeather(apiKey, name, product1, app_id, app_code)
+                    val call = hereApi.getWeather(apiKey, name, product1, appId, appCode)
                     call.enqueue(object : Callback<WeatherModel?> {
                         override fun onFailure(call: Call<WeatherModel?>, t: Throwable) {
                         }
@@ -146,23 +149,33 @@ class CityWeatherFragment : Fragment() {
                             call: Call<WeatherModel?>,
                             response: Response<WeatherModel?>
                         ) {
-                            val forecasts = response.body()?.dailyForecasts?.forecastLocation?.forecast
+                            val forecasts =
+                                response.body()?.dailyForecasts?.forecastLocation?.forecast
                             val list = mutableListOf<Forecast>()
                             if (forecasts != null) {
                                 for (i in 0 until forecasts.count()) {
                                     forecasts[i].let { it1 -> list.add(it1) }
                                 }
                             }
-                            recycler_view.apply {
-                                layoutManager =
-                                    LinearLayoutManager(context, LinearLayout.HORIZONTAL, false)
-                                adapter = MyListAdapter(list)
-                            }
+                                recycler_view.apply {
+                                    layoutManager =
+                                        LinearLayoutManager(context, LinearLayout.HORIZONTAL, false)
+                                        adapter = MyListAdapter(list)
+                                }
                         }
                     })
                     cityEditText.text.clear()
-                } else Toast.makeText(this.activity, "Enter the city", Toast.LENGTH_LONG).show()
-               true
+                } else
+                    Toast.makeText(this.activity, "Enter the city", Toast.LENGTH_LONG).show()
+                tempView.text = null
+                address.text = null
+                imageSeason.setImageResource(0)
+                latTextView.text  = null
+                longTextView.text = null
+                recycler_view.apply {
+                    layoutManager = LinearLayoutManager(context)
+                    adapter = MyListAdapter(listOf())
+                }
             }
             false
         }

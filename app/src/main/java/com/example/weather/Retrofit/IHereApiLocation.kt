@@ -11,9 +11,8 @@ interface IHereApiLocation {
         @Query("app_id") app_id: String,
         @Query("app_code") app_code: String,
         @Query("product") product: String,
-        @Query("oneobservation") oneobservation: String,
+        @Query("oneObservation") oneObservation: String,
         @Query("latitude") latitude: String,
-        @Query("longitude") longitude:String
-    )
+        @Query("longitude") longitude:String)
             : Call<DayForecasts>
 }

@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.CityWeatherFragment">
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="25dp"
-        android:background="@drawable/bg_gradient">
+        android:background="@drawable/bg_gradient"
+        tools:ignore="UselessParent">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                         android:id="@+id/address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="City,Country"
+                        android:hint="@string/city_country"
                         android:textSize="18sp"
                         android:gravity="center"
                         android:textColorHint="@android:color/tab_indicator_text"
@@ -69,13 +69,13 @@
                             android:id="@+id/cityEditText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="Enter the city"
+                            android:hint="@string/enter_the_city"
                             android:inputType="textCapCharacters"
                             android:imeOptions="actionDone"
                             android:textColor="@android:color/white"
                             android:textSize="20sp"
                             android:textColorHint="@android:color/tab_indicator_text"
-                            />
+                            android:autofillHints="" />
 
 
                     </LinearLayout>
@@ -84,13 +84,14 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center"
-                        android:layout_marginTop="10dp">
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="20dp">
 
                     <TextView
                         android:id="@+id/latTextView"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:hint="lat:"
+                        android:hint="@string/lat"
                         android:textColorHint="@android:color/tab_indicator_text"
                         android:inputType="none"
                         android:enabled="false"
@@ -102,7 +103,7 @@
                         android:id="@+id/longTextView"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:hint="Long:"
+                        android:hint="@string/longitude"
                         android:inputType="none"
                         android:enabled="false"
                         android:textColor="@android:color/white"
@@ -126,7 +127,8 @@
                         android:id="@+id/imageSeason"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:layout_marginLeft="50dp"/>
+                        android:layout_marginStart="50dp"
+                        android:contentDescription="@string/todo" />
 
                     <TextView
                         android:id="@+id/tempView"
@@ -134,7 +136,6 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:fontFamily="sans-serif-thin"
-                        android:text="0°C"
                         android:textSize="70sp" />
 
                 </LinearLayout>
@@ -175,7 +176,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:visibility="gone"
-            android:text="Something went wrong"/>
+            android:text="@string/something_went_wrong"/>
 
     </RelativeLayout>
 

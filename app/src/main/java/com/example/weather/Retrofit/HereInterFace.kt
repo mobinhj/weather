@@ -15,6 +15,4 @@ interface IHereApi {
                    @Query("app_id") app_id:String,
                    @Query("app_code") app_code :String)
         : Call<WeatherModel>
-
-
 }
