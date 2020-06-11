@@ -1,13 +1,18 @@
 package com.example.weather.Fragments
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewAnimationUtils
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.weather.Json.DailyForecasts.DayForecasts.DayForecasts
@@ -19,6 +24,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.MarkerOptions
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.dialog_icone.view.*
+import kotlinx.android.synthetic.main.fragment_location_weather.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -56,9 +62,102 @@ class LocationWeatherFragment : Fragment(),OnMapReadyCallback {
     }
     override fun onMapReady(googleMap : GoogleMap ){
         mMap = googleMap
+        when (mMap.mapType) {
+            GoogleMap.MAP_TYPE_SATELLITE -> {
+                map_type_satellite_background.visibility = View.VISIBLE
+                map_type_satellite_text.setTextColor(Color.BLUE)
+            }
+            GoogleMap.MAP_TYPE_TERRAIN -> {
+                map_type_terrain_background.visibility = View.VISIBLE
+                map_type_terrain_text.setTextColor(Color.BLUE)
+            }
+            else -> {
+                map_type_default_background.visibility = View.VISIBLE
+                map_type_default_text.setTextColor(Color.BLUE)
+            }
+        }
+        map_type_FAB.setOnClickListener {
+            // Start animator to reveal the selection view, starting from the FAB itself
+            val anim = ViewAnimationUtils.createCircularReveal(
+                map_type_selection,
+                map_type_selection.width - (map_type_FAB.width / 2),
+                map_type_FAB.height / 2,
+                map_type_FAB.width / 2f,
+                map_type_selection.width.toFloat())
+            anim.duration = 200
+            anim.interpolator = AccelerateDecelerateInterpolator()
+            anim.addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationStart(animation: Animator?) {
+                    super.onAnimationEnd(animation)
+                    map_type_selection.visibility = View.VISIBLE
+                }
+            })
+            anim.start()
+            map_type_FAB.visibility = View.INVISIBLE
+        }
+        map_type_default.setOnClickListener {
+            map_type_default_background.visibility = View.VISIBLE
+            map_type_satellite_background.visibility = View.INVISIBLE
+            map_type_terrain_background.visibility = View.INVISIBLE
+            map_type_default_text.setTextColor(Color.BLUE)
+            map_type_satellite_text.setTextColor(Color.parseColor("#808080"))
+            map_type_terrain_text.setTextColor(Color.parseColor("#808080"))
+            mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+        }
+
+        // Handle selection of the Satellite map type
+        map_type_satellite.setOnClickListener {
+            map_type_default_background.visibility = View.INVISIBLE
+            map_type_satellite_background.visibility = View.VISIBLE
+            map_type_terrain_background.visibility = View.INVISIBLE
+            map_type_default_text.setTextColor(Color.parseColor("#808080"))
+            map_type_satellite_text.setTextColor(Color.BLUE)
+            map_type_terrain_text.setTextColor(Color.parseColor("#808080"))
+            mMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
+        }
+
+        // Handle selection of the terrain map type
+        map_type_terrain.setOnClickListener {
+            map_type_default_background.visibility = View.INVISIBLE
+            map_type_satellite_background.visibility = View.INVISIBLE
+            map_type_terrain_background.visibility = View.VISIBLE
+            map_type_default_text.setTextColor(Color.parseColor("#808080"))
+            map_type_satellite_text.setTextColor(Color.parseColor("#808080"))
+            map_type_terrain_text.setTextColor(Color.BLUE)
+            mMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
+        }
         mMap.uiSettings.isZoomControlsEnabled = true
         val picasso = Picasso.get()
+        mMap.setOnMapClickListener{
+            map_type_selection.visibility = View.INVISIBLE
+            map_type_FAB.visibility = View.VISIBLE
+        }
         mMap.setOnMapLongClickListener { latLng ->
+            map_type_selection.visibility = View.INVISIBLE
+            if (map_type_FAB.visibility == View.INVISIBLE) {
+                // Start animator close and finish at the FAB position
+                val anim = ViewAnimationUtils.createCircularReveal(
+                    map_type_selection,
+                    map_type_selection.width - (map_type_FAB.width / 2),
+                    map_type_FAB.height / 2,
+                    map_type_selection.width.toFloat(),
+                    map_type_FAB.width / 2f)
+                anim.duration = 200
+                anim.interpolator = AccelerateDecelerateInterpolator()
+                anim.addListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator?) {
+                        super.onAnimationEnd(animation)
+                        map_type_selection.visibility = View.INVISIBLE
+                    }
+                })
+                // Set a delay to reveal the FAB. Looks better than revealing at end of animation
+                Handler().postDelayed({
+                    kotlin.run {
+                        map_type_FAB.visibility = View.VISIBLE
+                    }
+                }, 100)
+                anim.start()
+            }
             val markerOptions =  MarkerOptions()
             markerOptions.position(latLng)
             val retrofit = Retrofit.Builder().baseUrl(baseUrl)
