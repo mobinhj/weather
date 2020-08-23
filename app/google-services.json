@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "381666253027",
+    "firebase_url": "https://weather-ecdca.firebaseio.com",
+    "project_id": "weather-ecdca",
+    "storage_bucket": "weather-ecdca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:381666253027:android:a6e0d0b4d9eef6c7e64dd6",
+        "android_client_info": {
+          "package_name": "com.example.weather"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "381666253027-s4siluuea2acsg3q0k7u5otuib3hi64n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbeaV0YE94co8sWi8LDlDJoKFXh6fLNBg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "381666253027-s4siluuea2acsg3q0k7u5otuib3hi64n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
