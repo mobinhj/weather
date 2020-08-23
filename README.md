@@ -4,6 +4,6 @@
 Simple Weather Climate App for Android
 
 # Developed By 
-Mobin Habibi Jouybari
+ Mobin Habibi Jouybari
 
 For contact, shoot me an email at mobin.hj@gmail.com
