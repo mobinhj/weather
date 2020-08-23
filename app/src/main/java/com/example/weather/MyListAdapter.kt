@@ -1,4 +1,4 @@
-package com.example.mylistview
+package com.example.weather
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -9,18 +9,17 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.weather.Json.DailyForecasts.Forecast_7days.Forecast
-import com.example.weather.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_adapter.view.*
 
 
-class MyListAdapter ( private var exampleList : List<Forecast>): Adapter<MyListAdapter.ExampleViewHolder>() {
+class MyListAdapter ( private var exampleList : List<Forecast>):
+    Adapter<MyListAdapter.ExampleViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExampleViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.layout_adapter ,parent ,false )
-
+        val itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.layout_adapter ,parent ,false )
         return ExampleViewHolder(itemView)
     }
-
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ExampleViewHolder, position: Int) {
         val currentItem = exampleList[position]

@@ -56,7 +56,8 @@
             android:background="@drawable/type_default"
             android:scaleType="fitCenter"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+            app:layout_constraintTop_toBottomOf="@+id/textView13"
+            tools:ignore="ContentDescription" />
 
         <View
             android:id="@+id/map_type_satellite_background"
@@ -80,7 +81,8 @@
             android:scaleType="fitCenter"
             app:layout_constraintEnd_toStartOf="@+id/map_type_terrain"
             app:layout_constraintStart_toEndOf="@+id/map_type_default"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+            app:layout_constraintTop_toBottomOf="@+id/textView13"
+            tools:ignore="ContentDescription" />
 
         <View
             android:id="@+id/map_type_terrain_background"
@@ -102,7 +104,8 @@
             android:background="@drawable/terrain"
             android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+            app:layout_constraintTop_toBottomOf="@+id/textView13"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/textView13"

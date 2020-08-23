@@ -22,7 +22,6 @@
                 android:layout_height="wrap_content"
                 android:visibility="visible">
 
-
                 <LinearLayout
                     android:id="@+id/addressContainer"
                     android:layout_width="match_parent"
@@ -154,9 +153,9 @@
                             android:id="@+id/recycler_view"
                             android:paddingHorizontal="14dp"
                             tools:listitem="@layout/layout_adapter"
-                            android:clipToPadding="false"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent"
+                            android:layout_width="match_parent">
+                        </androidx.recyclerview.widget.RecyclerView>
 
                     </LinearLayout>
 

@@ -21,7 +21,9 @@ import com.example.weather.Json.DailyForecasts.Forecast_7days.WeatherModel
 import com.example.weather.R
 import com.example.weather.Retrofit.IHereApi
 import com.example.weather.Retrofit.IHereApiDay
-import com.example.mylistview.MyListAdapter
+import com.example.weather.MyListAdapter
+import com.example.weather.Database.CitiesDBHelper
+import com.example.weather.Database.CityModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_city_weather.*
 import kotlinx.android.synthetic.main.fragment_city_weather.recycler_view
@@ -37,23 +39,22 @@ import java.util.*
  * A simple [Fragment] subclass.
  */
 class CityWeatherFragment : Fragment() {
+    private lateinit var citiesDBHelper: CitiesDBHelper
     private val baseUrl = "https://weather.api.here.com/weather/1.0/"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        citiesDBHelper = this.activity?.let { CitiesDBHelper(it) }!!
         return inflater.inflate(R.layout.fragment_city_weather, container, false)
     }
-
-
+    @SuppressLint("SetTextI18n")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val product1 = "forecast_7days_simple"
         val appId = "NGkPDa4koRes4s9mNW0s"
         val appCode = "xdjT6t-y6emD9tugkEW_7w"
         val product = "observation"
-        val name = cityEditText.text
         val apiKey = "1r2mYo9MtRCoYu68HWa0R0Kru4axR2YwZSQATuPxx1U"
         val oneObservation = true
 
@@ -73,11 +74,12 @@ class CityWeatherFragment : Fragment() {
         }
         cityEditText.setOnEditorActionListener { v, actionId, event ->
             update_at.text = Date().toString()
+            val name =  cityEditText.text
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 hideKeyboard()
                 if (name.isNotEmpty()) {
                     val builder = AlertDialog.Builder(context)
-                    builder.setCancelable(false) // if you want user to wait for some process to finish,
+                    builder.setCancelable(false)
                     builder.setView(R.layout.progress)
                     val dialog: AlertDialog = builder.create()
                     dialog.window?.setBackgroundDrawable( ColorDrawable(Color.TRANSPARENT))
@@ -120,14 +122,17 @@ class CityWeatherFragment : Fragment() {
                             val temp   = observation?.temperature?.toDouble()?.toInt().toString()
                             val lat  = observation?.latitude
                             val long = observation?.longitude
-                            val icon = observation?.iconLink
+                            val icon = observation?.iconLink.toString()
                             val picasso= Picasso.get()
+                            val date = observation?.utcTime?.substring(0 ,10).toString()
+                            Log.i("console","date : $date")
                             if (city != null) {
                                 latTextView.text  = "Lat: " + lat.toString()
                                 longTextView.text = "Long: "+ long.toString()
                                 tempView.text     = "$temp°C"
                                 address.text      = "$city,$country"
                                 picasso.load(icon).into(imageSeason)
+                                citiesDBHelper.insertCity(CityModel(city,date, temp, icon))
                                 dialog.dismiss()
                             } else {
                                 dialog.dismiss()
@@ -157,7 +162,7 @@ class CityWeatherFragment : Fragment() {
                                     forecasts[i].let { it1 -> list.add(it1) }
                                 }
                             }
-                                recycler_view.apply {
+                            recycler_view.apply {
                                     layoutManager =
                                         LinearLayoutManager(context, LinearLayout.HORIZONTAL, false)
                                         adapter = MyListAdapter(list)

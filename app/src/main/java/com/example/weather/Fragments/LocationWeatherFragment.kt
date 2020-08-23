@@ -7,7 +7,6 @@ import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewAnimationUtils
@@ -15,6 +14,8 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.weather.Database.CitiesDBHelper
+import com.example.weather.Database.CityModel
 import com.example.weather.Json.DailyForecasts.DayForecasts.DayForecasts
 import com.example.weather.R
 import com.example.weather.Retrofit.IHereApiLocation
@@ -37,17 +38,9 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 class LocationWeatherFragment : Fragment(),OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
+    private lateinit var citiesDBHelper: CitiesDBHelper
     private val context: LocationWeatherFragment = this
-    private var city :String? = ""
-    private var country:String? = ""
-    private var temp:String? = ""
-    private var icon:String? = ""
-    private var state:String? = ""
-    private val baseUrl = "https://weather.api.here.com/weather/1.0/"
-    private val appId   = "NGkPDa4koRes4s9mNW0s"
-    private val appCode = "xdjT6t-y6emD9tugkEW_7w"
-    private val product  = "observation"
-    private val oneObservation = "true"
+
         companion object {
         var mapFragment : SupportMapFragment?=null
     }
@@ -55,12 +48,23 @@ class LocationWeatherFragment : Fragment(),OnMapReadyCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View?{
+        citiesDBHelper = this.activity?.let { CitiesDBHelper(it) }!!
         val rootView = inflater.inflate(R.layout.fragment_location_weather, container, false)
         mapFragment = childFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
         return rootView
     }
     override fun onMapReady(googleMap : GoogleMap ){
+        var city :String?
+        var country:String?
+        var temp: String?
+        var icon:String?
+        var state:String?
+        val baseUrl = "https://weather.api.here.com/weather/1.0/"
+        val appId   = "NGkPDa4koRes4s9mNW0s"
+        val appCode = "xdjT6t-y6emD9tugkEW_7w"
+        val product  = "observation"
+        val oneObservation = "true"
         mMap = googleMap
         when (mMap.mapType) {
             GoogleMap.MAP_TYPE_SATELLITE -> {
@@ -77,7 +81,6 @@ class LocationWeatherFragment : Fragment(),OnMapReadyCallback {
             }
         }
         map_type_FAB.setOnClickListener {
-            // Start animator to reveal the selection view, starting from the FAB itself
             val anim = ViewAnimationUtils.createCircularReveal(
                 map_type_selection,
                 map_type_selection.width - (map_type_FAB.width / 2),
@@ -104,8 +107,6 @@ class LocationWeatherFragment : Fragment(),OnMapReadyCallback {
             map_type_terrain_text.setTextColor(Color.parseColor("#808080"))
             mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
         }
-
-        // Handle selection of the Satellite map type
         map_type_satellite.setOnClickListener {
             map_type_default_background.visibility = View.INVISIBLE
             map_type_satellite_background.visibility = View.VISIBLE
@@ -115,8 +116,6 @@ class LocationWeatherFragment : Fragment(),OnMapReadyCallback {
             map_type_terrain_text.setTextColor(Color.parseColor("#808080"))
             mMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
         }
-
-        // Handle selection of the terrain map type
         map_type_terrain.setOnClickListener {
             map_type_default_background.visibility = View.INVISIBLE
             map_type_satellite_background.visibility = View.INVISIBLE
@@ -135,7 +134,6 @@ class LocationWeatherFragment : Fragment(),OnMapReadyCallback {
         mMap.setOnMapLongClickListener { latLng ->
             map_type_selection.visibility = View.INVISIBLE
             if (map_type_FAB.visibility == View.INVISIBLE) {
-                // Start animator close and finish at the FAB position
                 val anim = ViewAnimationUtils.createCircularReveal(
                     map_type_selection,
                     map_type_selection.width - (map_type_FAB.width / 2),
@@ -150,7 +148,6 @@ class LocationWeatherFragment : Fragment(),OnMapReadyCallback {
                         map_type_selection.visibility = View.INVISIBLE
                     }
                 })
-                // Set a delay to reveal the FAB. Looks better than revealing at end of animation
                 Handler().postDelayed({
                     kotlin.run {
                         map_type_FAB.visibility = View.VISIBLE
@@ -170,7 +167,6 @@ class LocationWeatherFragment : Fragment(),OnMapReadyCallback {
                 .getWeatherLocation(appId,appCode,product,oneObservation,latitude,longitude)
             callLocationWeather.enqueue(object : Callback<DayForecasts> {
                 override fun onFailure(call: Call<DayForecasts>, t: Throwable) {
-
                 }
                 @SuppressLint("SetTextI18n")
                 override fun onResponse(call: Call<DayForecasts>, response:Response<DayForecasts>){
@@ -186,13 +182,15 @@ class LocationWeatherFragment : Fragment(),OnMapReadyCallback {
                     val dialogBuilder = AlertDialog.Builder(context.getContext(),R.style.CustomAlertDialog)
                     picasso.load(icon).into(customView.image_icon)
                     val hobbies = arrayOf("$city,$state,$country\n temperature: $temp°C")
-                    Log.i("console", "$state,$city,$country,$temp°C")
                     val textView = TextView(context.getContext())
+                    val date = observation?.utcTime?.substring(0 ,10).toString()
                     textView.text = "Location Weather Info :"
                     textView.setPadding(40, 30, 20, 30)
                     textView.textSize = 20f
                     textView.setBackgroundColor(Color.TRANSPARENT)
                     textView.setTextColor(Color.BLACK)
+                    val cit = city.toString()
+                    citiesDBHelper.insertCity(CityModel(cit,date,temp.toString(),icon.toString()))
                     val items = dialogBuilder.setView(customView).setCustomTitle(textView)
                         .setItems(hobbies) { dialog, which ->
                         }

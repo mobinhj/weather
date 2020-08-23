@@ -18,4 +18,7 @@
     <string name="default_map">Default</string>
     <string name="satellite">Satellite</string>
     <string name="terrain">Terrain</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="temp_day">tempDay</string>
+    <string name="date">date</string>
 </resources>
